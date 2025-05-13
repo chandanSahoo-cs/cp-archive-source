@@ -21,7 +21,6 @@ void realmsDomain(){
 	for(int i=0;i<val;i++){
 		cout<<i<<"\n";
 	}
-	cout<<"\n";
 }
 
 int main() {
