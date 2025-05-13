@@ -17,11 +17,6 @@ const int mod = 1e9+7;
 
 void realmsDomain(){
 	ll val; cin>>val;
-
-	for(int i=0;i<val;i++){
-		cout<<i<<"\n";
-	}
-	cout<<"\n";
 }
 
 int main() {
