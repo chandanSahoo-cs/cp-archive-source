@@ -1,4 +1,4 @@
-name: Archive CP Solutions
+name: Archive Changed CP Files
 
 on:
   push:
@@ -26,16 +26,15 @@ jobs:
 
       - name: Clone archive repo
         run: |
-          git clone https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/chandanSahoo-cs/cp-archive.git archive
+          git clone https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/yourusername/cp-archive.git archive
 
-      - name: Copy and rename .cpp files with question name and readable timestamp
+      - name: Copy only changed .cpp files from onlineJudge
         run: |
           mkdir -p archive/
-          for file in onlineJudge/*.cpp; do
-            if [ -f "$file" ]; then
-              base=$(basename "$file")
-              cp "$file" "archive/${QUESTION_NAME}_${NOW}_${base}"
-            fi
+          CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | grep '^onlineJudge/.*\.cpp$' || true)
+          for file in $CHANGED_FILES; do
+            base=$(basename "$file")
+            cp "$file" "archive/${QUESTION_NAME}_${NOW}_${base}"
           done
 
       - name: Commit and push to archive repo
