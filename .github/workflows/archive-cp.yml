@@ -3,7 +3,7 @@ name: Archive Changed CP Files
 on:
   push:
     branches:
-      - main  # or your branch name
+      - main
 
 jobs:
   archive:
@@ -31,9 +31,10 @@ jobs:
       - name: Copy only changed .cpp files from onlineJudge
         run: |
           mkdir -p archive/
-          echo "Finding changed .cpp files in onlineJudge/..."
-          CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | grep '^onlineJudge/.*\.cpp$' || true)
-          
+          echo "Detecting changed .cpp files from last commit..."
+
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '^onlineJudge/.*\.cpp$' || true)
+
           if [ -z "$CHANGED_FILES" ]; then
             echo "⚠️ No changed .cpp files found in onlineJudge/"
           else
