@@ -45,9 +45,8 @@ jobs:
           fi
 
           for file in $CHANGED_FILES; do
-            base=$(basename "$file")
-            cp "$file" "archive/${QUESTION_NAME}_${NOW}_${base}"
-            echo "✔️ Archived: $file -> archive/${QUESTION_NAME}_${NOW}_${base}"
+            cp "$file" "archive/${QUESTION_NAME}_${NOW}.cpp"
+            echo "✔️ Archived: $file -> archive/${QUESTION_NAME}_${NOW}.cpp"
           done
 
       - name: Commit and push to archive repo
