@@ -8,6 +8,8 @@ using namespace std;
 
 void realmsDomain(){
     cout<<"HeggVllo Chandan"<<"\n";
+    ll val; cin>>val;
+    
 }
 
 int main() {
