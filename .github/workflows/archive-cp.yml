@@ -26,7 +26,7 @@ jobs:
 
       - name: Clone archive repo
         run: |
-          git clone https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/yourusername/cp-archive.git archive
+          git clone https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/chandanSahoo-cs/cp-archive.git archive
 
       - name: Copy only changed .cpp files from onlineJudge
         run: |
