@@ -7,7 +7,7 @@ using namespace std;
 #define ll long long
 
 void realmsDomain(){
-    
+    cout<<"\n";
 }
 
 int main() {

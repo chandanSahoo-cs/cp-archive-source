@@ -3,7 +3,7 @@ name: Archive Changed CP Files
 on:
   push:
     branches:
-      - main
+      - main  # or your branch name
 
 jobs:
   archive:
@@ -26,15 +26,25 @@ jobs:
 
       - name: Clone archive repo
         run: |
-          git clone https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/chandanSahoo-cs/cp-archive.git archive
+          git clone https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/yourusername/cp-archive.git archive
 
       - name: Copy only changed .cpp files from onlineJudge
         run: |
           mkdir -p archive/
+          echo "Finding changed .cpp files in onlineJudge/..."
           CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | grep '^onlineJudge/.*\.cpp$' || true)
+          
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "⚠️ No changed .cpp files found in onlineJudge/"
+          else
+            echo "Found changed files:"
+            echo "$CHANGED_FILES"
+          fi
+
           for file in $CHANGED_FILES; do
             base=$(basename "$file")
             cp "$file" "archive/${QUESTION_NAME}_${NOW}_${base}"
+            echo "✔️ Archived: $file -> archive/${QUESTION_NAME}_${NOW}_${base}"
           done
 
       - name: Commit and push to archive repo
@@ -45,7 +55,7 @@ jobs:
           git add .
 
           if git diff --cached --quiet; then
-            echo "No changes to commit."
+            echo "No new files to commit."
           else
             git commit -m "Archived: $QUESTION_NAME at $NOW"
             git push
