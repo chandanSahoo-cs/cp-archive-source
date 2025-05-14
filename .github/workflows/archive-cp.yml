@@ -10,8 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source repo
+      - name: Checkout source repo (with 2 commits)
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - name: Set readable timestamp
         run: |
@@ -26,7 +28,7 @@ jobs:
 
       - name: Clone archive repo
         run: |
-          git clone https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/chandanSahoo-cs/cp-archive.git archive
+          git clone https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/chandnaSahoo-cs/cp-archive.git archive
 
       - name: Copy only changed .cpp files from onlineJudge
         run: |
