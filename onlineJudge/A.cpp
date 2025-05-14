@@ -17,9 +17,8 @@ const int mod = 1e9+7;
 
 void realmsDomain(){
 	ll val; cin>>val;
-    cout<<"Hello"<<"\n";
 }
-g
+
 int main() {
     clock_t time_req = clock();
     velociraptor
