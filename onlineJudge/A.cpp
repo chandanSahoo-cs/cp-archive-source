@@ -24,14 +24,14 @@ void realmsDomain(){
         ll m = l+(r-l)/2;
         ll a = m/w;
         ll b = m/h;
-        if(a>=n || b>=n || a*b>=n){
+        if((a>=n && b>0) || (b>=n && a>0) || a*b>=n){
             ans=min(m,ans);
             r=m-1;
         }
         else l=m+1;
     }
 
-    cout<<ans;
+    cout<<ans<<"\n";
 }
 
 int main() {
