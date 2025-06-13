@@ -31,7 +31,7 @@ void realmsDomain(){
         else l=m+1;
     }
 
-    cout<<ans;
+    cout<<ans<<"\n";
 }
 
 int main() {
