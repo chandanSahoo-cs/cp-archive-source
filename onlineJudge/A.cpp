@@ -15,67 +15,27 @@ const int mod = 1e9+7;
 #define deb(x...)
 #endif
 
-ll prtCnt(ll ti,ll zi,ll yi,ll t){
-    ll tot = ti*zi+yi;
-    ll cnt=(t/tot)*zi;
-    deb(cnt);
-    ll rem = t%tot;
-    cnt+=min(zi,rem/ti);
-    return cnt;
-}
-
-ll totCnt(vector<vector<ll>>&a , ll t, vector<ll>&store){
-    ll cnt=0;
-
-    for(auto ele:a){
-        ll curr=prtCnt(ele[0],ele[1],ele[2],t);
-        cnt+=curr;
-        store.push_back(curr);
-    }
-
-    return cnt;
+double calc(double x){
+    return x*x+sqrt(x);
 }
 
 void realmsDomain(){
-    ll m,n; cin>>m>>n;
-    vector<vector<ll>>a(n,vector<ll>(3));
+    double c; cin>>c;
 
-    for(auto &ele:a){
-        cin>>ele[0]>>ele[1]>>ele[2];
-    }
-    deb(a);
-    ll l=0,r=2e10;
-    ll ans=r;
-    vector<ll>astore;
-    while(l<=r){
-        ll t = l+(r-l)/2;
-        vector<ll>store;
-        ll cnt = totCnt(a,t,store);
-        if(cnt>=m){
-            r=t-1;
-            if(ans>t){
-                ans = t;
-                astore=store;
-            }
+    double l=0,r=10;
+    double ans=r;
+    for(ll i=0;i<100;i++){
+        double m = l+(r-l)/2;
+        double val = calc(m);
+        deb(m,val);
+        if(val>=c){
+            r=m-1;
+            ans = min(ans,m);
         }
-        else l=t+1;
-        deb(t,cnt,ans,astore);
+        else l=m+1;
     }
 
-    ll minCnt = accumulate(all(astore),0LL);
-    if(minCnt>m){
-        ll excess = minCnt-m;
-        for(auto &ele:astore){
-            ll red = min(ele,excess);
-            ele-=red;
-            excess-=red;
-        }
-    }
-
-    cout<<ans<<"\n";
-    for(auto ele:astore){
-        cout<<ele<<" ";
-    }
+    cout<<fixed<<setprecision(15)<<ans;
 }
 
 int main() {
