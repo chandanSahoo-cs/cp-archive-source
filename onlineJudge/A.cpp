@@ -15,27 +15,48 @@ const int mod = 1e9+7;
 #define deb(x...)
 #endif
 
-double calc(double x){
-    return x*x+sqrt(x);
+bool valid(string &t, string &p, vector<ll>&a, ll m){
+    ll n = t.size(), k= p.size();
+    vector<ll>mark(n,1);
+    for(ll i=0;i<m;i++){
+        mark[a[i]-1]=0;
+    }
+    deb(m,mark);
+
+    bool flag=false;
+    ll j=0;
+    for(ll i=0;i<n;i++){
+        if(mark[i] && t[i]==p[j]) j++;
+        if(j==k){
+            flag=true;
+            break;
+        }
+    }
+
+    return flag; 
 }
 
 void realmsDomain(){
-    double c; cin>>c;
+    string t,p; cin>>t>>p;
+    ll n = t.size();
 
-    double l=0,r=10;
-    double ans=r;
-    for(ll i=0;i<100;i++){
-        double m = l+(r-l)/2;
-        double val = calc(m);
-        deb(m,val);
-        if(val>=c){
-            r=m-1;
-            ans = min(ans,m);
+    vector<ll>a(n);
+    for(auto &ele:a) cin>>ele;
+    deb(a);
+
+    ll l=1,r=n;
+    ll ans=0;
+    while(l<=r){
+        ll m = l+(r-l)/2;
+        if(valid(t,p,a,m)){
+            l=m+1;
+            ans = max(ans,m);
         }
-        else l=m+1;
+        else{
+            r=m-1;
+        }
     }
-
-    cout<<fixed<<setprecision(15)<<ans;
+    cout<<ans;
 }
 
 int main() {
