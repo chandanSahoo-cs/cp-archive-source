@@ -15,48 +15,23 @@ const int mod = 1e9+7;
 #define deb(x...)
 #endif
 
-bool valid(string &t, string &p, vector<ll>&a, ll m){
-    ll n = t.size(), k= p.size();
-    vector<ll>mark(n,1);
-    for(ll i=0;i<m;i++){
-        mark[a[i]-1]=0;
-    }
-    deb(m,mark);
-
-    bool flag=false;
-    ll j=0;
-    for(ll i=0;i<n;i++){
-        if(mark[i] && t[i]==p[j]) j++;
-        if(j==k){
-            flag=true;
-            break;
-        }
-    }
-
-    return flag; 
-}
-
 void realmsDomain(){
-    string t,p; cin>>t>>p;
-    ll n = t.size();
-
+    ll n,x,y; cin>>n>>x>>y;
     vector<ll>a(n);
-    for(auto &ele:a) cin>>ele;
-    deb(a);
-
-    ll l=1,r=n;
-    ll ans=0;
-    while(l<=r){
-        ll m = l+(r-l)/2;
-        if(valid(t,p,a,m)){
-            l=m+1;
-            ans = max(ans,m);
+    ll cnt=0;
+    map<pair<ll,ll>,ll>mp;
+    for(auto &ele:a){
+        cin>>ele;
+        pair<ll,ll>p={(x-ele%x)%x,ele%y};
+        deb(ele,mp);
+        if(mp.find(p)!=mp.end()){
+            deb(p);
+            cnt+=mp[p];
         }
-        else{
-            r=m-1;
-        }
+        mp[{ele%x,ele%y}]++;
     }
-    cout<<ans;
+
+    cout<<cnt<<"\n";
 }
 
 int main() {
@@ -70,7 +45,7 @@ int main() {
 
     ll tsts = 1 ; 
 
-    // cin>>tsts;    
+    cin>>tsts;    
 
     for(ll testcase = 1 ; testcase <=  tsts ; testcase++ ){
         realmsDomain();
