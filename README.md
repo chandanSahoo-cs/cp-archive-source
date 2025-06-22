@@ -1,0 +1,1 @@
+This repository contains regularly updated Competitive Programming solutions. Each time a change is pushed, relevant .cpp files from the onlineJudge/ folder are automatically archived with a question-specific name and timestamp in a separate archive repository.
