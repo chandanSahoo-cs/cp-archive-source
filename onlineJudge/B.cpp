@@ -1,3 +1,5 @@
+/*It is not the matter of if, it is the matter of when*/
+        
 #include "bits/stdc++.h"
 using namespace std;
 
@@ -16,7 +18,31 @@ const int mod = 1e9+7;
 #endif
 
 void realmsDomain(){
- cout<<"Chandan"<<"\n";
+  ll n; cin>>n;
+  vector<ll>a(n);
+  for(auto &ele:a) cin>>ele;
+  vector<ll>ans(n);
+  for(ll i=n-1;i>=0;i--){
+    ll l=0,r=i;
+    ll mn=r;
+    while(l<=r){
+      ll m = l+(r-l)/2;
+      if(a[m]/(i-m+1)>=1){
+        r=m-1;
+        mn = min(mn,m);
+      }else {
+        l=m+1;
+      }
+    }
+
+    ans[i]=i-mn+1;
+  }
+
+  for(auto ele:ans){
+    cout<<ele<<" ";
+  }
+
+  cout<<"\n";
 }
 
 int main() {
