@@ -1,1 +1,4 @@
-Time : 0.000171
+[n-cnt,ways] = [1, 2]
+[n-cnt,ways] = [2, 3]
+[n-cnt,ways] = [0, 1]
+Time : 0.000000

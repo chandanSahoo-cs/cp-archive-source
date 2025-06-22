@@ -17,34 +17,40 @@ const int mod = 1e9+7;
 #define deb(x...)
 #endif
 
+ll fact(ll n){
+  if(n==0) return 1;
+  ll ans=1;
+  for(ll i=1;i<=n;i++){
+    ans = (ans*i)%mod;
+  }
+  return ans;
+}
+
+
 void realmsDomain(){
-  ll n; cin>>n;
-  vector<ll>a(n);
-  for(auto &ele:a) cin>>ele;
-  vector<ll>m(n);
-  m[0]=-1;
+  string s; cin>>s;
+  ll n = s.size();
+
+  ll curr=1;
+  ll ways=1;
+  ll cnt=0;
 
   for(ll i=1;i<n;i++){
-    if(a[i]==a[i-1]){
-      m[i]=m[i-1];
-    }
-    else m[i]=i-1;
+    if(s[i]!=s[i-1]){
+      ways=(ways*curr)%mod;
+      curr=1;
+      cnt++;
+    }else curr++;
   }
 
-  ll q; cin>>q;
+  cnt++;
+  ways=(ways*curr)%mod;
+  deb(n-cnt,ways);
+  ll ans = (ways*fact(n-cnt))%mod;
 
-  for(ll i=0;i<q;i++){
-    ll l,r; cin>>l>>r;
-
-    if(m[l-1]==m[r-1]){
-      cout<<-1<<" "<<-1<<"\n";
-    }else{
-      cout<<m[r-1]+1<<" "<<r<<"\n";
-    }
-  }
-
-  cout<<"\n";  
+  cout<<n-cnt<<" "<<ans<<"\n";
 }
+
 
 int main() {
     clock_t time_req = clock();
