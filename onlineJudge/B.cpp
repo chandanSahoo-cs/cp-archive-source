@@ -21,28 +21,29 @@ void realmsDomain(){
   ll n; cin>>n;
   vector<ll>a(n);
   for(auto &ele:a) cin>>ele;
-  vector<ll>ans(n);
-  for(ll i=n-1;i>=0;i--){
-    ll l=0,r=i;
-    ll mn=r;
-    while(l<=r){
-      ll m = l+(r-l)/2;
-      if(a[m]/(i-m+1)>=1){
-        r=m-1;
-        mn = min(mn,m);
-      }else {
-        l=m+1;
-      }
+  vector<ll>m(n);
+  m[0]=-1;
+
+  for(ll i=1;i<n;i++){
+    if(a[i]==a[i-1]){
+      m[i]=m[i-1];
     }
-
-    ans[i]=i-mn+1;
+    else m[i]=i-1;
   }
 
-  for(auto ele:ans){
-    cout<<ele<<" ";
+  ll q; cin>>q;
+
+  for(ll i=0;i<q;i++){
+    ll l,r; cin>>l>>r;
+
+    if(m[l-1]==m[r-1]){
+      cout<<-1<<" "<<-1<<"\n";
+    }else{
+      cout<<m[r-1]+1<<" "<<r<<"\n";
+    }
   }
 
-  cout<<"\n";
+  cout<<"\n";  
 }
 
 int main() {
