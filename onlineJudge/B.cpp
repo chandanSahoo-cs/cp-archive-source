@@ -17,40 +17,39 @@ const int mod = 1e9+7;
 #define deb(x...)
 #endif
 
-ll fact(ll n){
-  if(n==0) return 1;
-  ll ans=1;
-  for(ll i=1;i<=n;i++){
-    ans = (ans*i)%mod;
-  }
-  return ans;
-}
-
-
 void realmsDomain(){
-  string s; cin>>s;
-  ll n = s.size();
+  ll n; cin>>n;
+  bool ans=false;
+  map<ll,ll>a;
 
-  ll curr=1;
-  ll ways=1;
-  ll cnt=0;
+  vector<vector<ll>>p;
 
-  for(ll i=1;i<n;i++){
-    if(s[i]!=s[i-1]){
-      ways=(ways*curr)%mod;
-      curr=1;
-      cnt++;
-    }else curr++;
+  for(ll i=0;i<n;i++){
+    ll k; cin>>k;
+    vector<ll>temp;
+    for(ll i=0;i<k;i++){
+        ll ele; cin>>ele;
+        temp.push_back(ele);
+        a[ele]++;
+    }
+    p.push_back(temp);
   }
 
-  cnt++;
-  ways=(ways*curr)%mod;
-  deb(n-cnt,ways);
-  ll ans = (ways*fact(n-cnt))%mod;
+  for(ll i=0;i<n;i++){
+    bool cmp=true;
+    for(ll j=0;j<(ll)p[i].size();j++){
+        if(a[p[i][j]]<2) cmp=false;
+    }
+    if(cmp){
+        ans=true;
+        break;
+    }
+  }
 
-  cout<<n-cnt<<" "<<ans<<"\n";
+  if(ans){
+    cout<<"YES\n";
+  }else cout<<"NO\n";  
 }
-
 
 int main() {
     clock_t time_req = clock();
