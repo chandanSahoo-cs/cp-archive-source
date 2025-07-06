@@ -19,36 +19,22 @@ const int mod = 1e9+7;
 
 void realmsDomain(){
   ll n; cin>>n;
-  bool ans=false;
-  map<ll,ll>a;
-
-  vector<vector<ll>>p;
-
-  for(ll i=0;i<n;i++){
-    ll k; cin>>k;
-    vector<ll>temp;
-    for(ll i=0;i<k;i++){
-        ll ele; cin>>ele;
-        temp.push_back(ele);
-        a[ele]++;
-    }
-    p.push_back(temp);
-  }
+  vector<ll>a(n,0);
+  vector<ll>sml(n,0);
+  ll cnt=0;
+  ll ans=0;
 
   for(ll i=0;i<n;i++){
-    bool cmp=true;
-    for(ll j=0;j<(ll)p[i].size();j++){
-        if(a[p[i][j]]<2) cmp=false;
-    }
-    if(cmp){
-        ans=true;
-        break;
+    cin>>a[i];
+    sml[i]=cnt;
+    if(i+1>a[i]){
+        cnt++;
+        deb(a[i],i+1);
+        if(a[i]!=0) ans+=sml[a[i]-1];
     }
   }
 
-  if(ans){
-    cout<<"YES\n";
-  }else cout<<"NO\n";  
+  cout<<ans<<"\n";  
 }
 
 int main() {
