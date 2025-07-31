@@ -18,23 +18,7 @@ const int mod = 1e9+7;
 #endif
 
 void realmsDomain(){
-  ll n; cin>>n;
-  vector<ll>a(n,0);
-  vector<ll>sml(n,0);
-  ll cnt=0;
-  ll ans=0;
-
-  for(ll i=0;i<n;i++){
-    cin>>a[i];
-    sml[i]=cnt;
-    if(i+1>a[i]){
-        cnt++;
-        deb(a[i],i+1);
-        if(a[i]!=0) ans+=sml[a[i]-1];
-    }
-  }
-
-  cout<<ans<<"\n";  
+    
 }
 
 int main() {
